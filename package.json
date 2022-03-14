@@ -1,16 +1,40 @@
 {
-  "name": "@example/minimal",
-  "version": "0.0.1",
-  "private": true,
-  "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview"
-  },
-  "devDependencies": {
-    "astro": "^0.24.0",
-    "postcss": "^8.4.8",
-    "tailwindcss": "^3.0.23"
-  }
+    "name": "remix-app-template",
+    "private": true,
+    "description": "",
+    "license": "",
+    "sideEffects": false,
+    "scripts": {
+        "css:dev": "postcss **/*.css --dir app/styles -w",
+        "css:build": "postcss **/*.css --dir app/styles --env production",
+        "build": "cross-env NODE_ENV=production css:build && remix build",
+        "remix:dev": "remix dev",
+        "dev": "cross-env NODE_ENV=development npm-run-all --parallel --print-label --race css:dev remix:dev",
+        "postinstall": "remix setup node"
+    },
+    "dependencies": {
+        "@remix-run/react": "^1.2.3",
+        "@remix-run/vercel": "^1.2.3",
+        "autoprefixer": "^10.4.2",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "remix": "^1.2.3"
+    },
+    "devDependencies": {
+        "@remix-run/dev": "^1.2.3",
+        "@remix-run/eslint-config": "^1.2.3",
+        "@remix-run/serve": "^1.2.3",
+        "@types/react": "^17.0.24",
+        "@types/react-dom": "^17.0.9",
+        "cross-env": "^7.0.3",
+        "eslint": "^8.9.0",
+        "npm-run-all": "^4.1.5",
+        "postcss": "^8.4.8",
+        "postcss-cli": "^9.1.0",
+        "tailwindcss": "^3.0.23",
+        "typescript": "^4.5.5"
+    },
+    "engines": {
+        "node": ">=14"
+    }
 }
