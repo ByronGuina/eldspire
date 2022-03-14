@@ -1,0 +1,16 @@
+p + p {
+    text-indent: 1.85rem;
+    margin-top: 0;
+}
+
+h1 {
+    @apply font-semibold text-4xl mb-12 mt-12;
+}
+
+h2 {
+    @apply font-semibold text-3xl mb-6 mt-12;
+}
+
+h3 {
+    @apply font-semibold text-2xl mb-4 mt-12;
+}

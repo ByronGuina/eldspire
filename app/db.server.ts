@@ -25,5 +25,7 @@ export async function getPage(id: string) {
         throw new Error('Empty block')
     }
 
-    return results.results
+    return {
+        blocks: results.results,
+    }
 }

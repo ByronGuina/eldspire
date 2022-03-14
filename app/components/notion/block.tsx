@@ -7,6 +7,7 @@ const componentMap: Record<NotionBlockType, (block: NotionBlock) => JSX.Element>
     heading_1: (block: NotionBlock) => <Heading key={block.id} block={block} />,
     heading_2: (block: NotionBlock) => <Heading key={block.id} block={block} />,
     heading_3: (block: NotionBlock) => <Heading key={block.id} block={block} />,
+    mention: (block: NotionBlock) => <Paragraph key={block.id} block={block} />,
 }
 
 export function fromNotionBlock(block: NotionBlock) {
