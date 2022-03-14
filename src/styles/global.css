@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400;1,600&display=swap');
+
+@tailwind base;
+
+body {
+    font-family: 'Newsreader', serif;
+    font-size: 18px;
+    line-height: 1.85rem;
+    color: #333;
+    background-color: #f2f2f0;
+}
+
+p {
+    margin-bottom: 1.85rem;
+}
+
+p {
+    margin-bottom: 0;
+}
+
+p + p {
+    text-indent: 1.85rem;
+    margin-top: 0;
+}
+
+.layout {
+    margin: auto;
+    max-width: 70ch;
+    padding: 6ch 2ch;
+}
+
+@tailwind components;
+@tailwind utilities;
