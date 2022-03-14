@@ -15,3 +15,15 @@ export async function getFrontPage() {
 
     return results.results
 }
+
+export async function getPage(id: string) {
+    const results = await notion.blocks.children.list({
+        block_id: id,
+    })
+
+    if (!results.results) {
+        throw new Error('Empty block')
+    }
+
+    return results.results
+}

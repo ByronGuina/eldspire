@@ -5,18 +5,27 @@ export type NotionTextBlock = {
         content: string
         link: string | null
     }
-    annotations: {
-        bold: boolean
-        italic: boolean
-        strikethrough: boolean
-        underline: boolean
-        code: boolean
-    }
+    annotations: Annotations
     plain_text: string
     href: string | null
 }
 
-export type NotionBlockType = 'paragraph' | 'heading_1' | 'heading_2' | 'heading_3'
+type Annotations = {
+    bold: boolean
+    italic: boolean
+    strikethrough: boolean
+    underline: boolean
+    code: boolean
+}
+
+export type NotionMentionBlock = {
+    id: string
+    type: 'mention'
+    annotations: Annotations
+    href: string
+}
+
+export type NotionBlockType = 'paragraph' | 'heading_1' | 'heading_2' | 'heading_3' | 'mention'
 
 // TODO: implement other block types
 export type NotionBlock = {
@@ -32,6 +41,13 @@ export type NotionBlock = {
         rich_text: NotionTextBlock[]
     }
     heading_3?: {
+        rich_text: NotionTextBlock[]
+    }
+    mention?: {
+        type: 'page'
+        page: {
+            id: string
+        }
         rich_text: NotionTextBlock[]
     }
 }
