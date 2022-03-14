@@ -13,6 +13,7 @@
         "postinstall": "remix setup node"
     },
     "dependencies": {
+        "@notionhq/client": "^1.0.3",
         "@remix-run/react": "^1.2.3",
         "@remix-run/vercel": "^1.2.3",
         "autoprefixer": "^10.4.2",

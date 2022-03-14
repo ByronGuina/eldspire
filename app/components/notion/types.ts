@@ -23,16 +23,16 @@ export type NotionBlock = {
     id: string
     type: NotionBlockType
     paragraph?: {
-        text: NotionTextBlock[]
+        rich_text: NotionTextBlock[]
     }
     heading_1?: {
-        text: NotionTextBlock[]
+        rich_text: NotionTextBlock[]
     }
     heading_2?: {
-        text: NotionTextBlock[]
+        rich_text: NotionTextBlock[]
     }
     heading_3?: {
-        text: NotionTextBlock[]
+        rich_text: NotionTextBlock[]
     }
 }
 
