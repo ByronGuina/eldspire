@@ -7,7 +7,7 @@
     "scripts": {
         "css:dev": "postcss **/*.css --dir app/styles -w",
         "css:build": "postcss **/*.css --dir app/styles --env production",
-        "build": "cross-env NODE_ENV=production npm run css:build && remix build",
+        "build": "cross-env NODE_ENV=production remix build",
         "remix:dev": "remix dev",
         "dev": "cross-env NODE_ENV=development npm-run-all --parallel --print-label --race css:dev remix:dev",
         "postinstall": "remix setup node"
