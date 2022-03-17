@@ -20,7 +20,7 @@ export const loader: LoaderFunction = async ({ params }) => {
 
     return json(await getPageByName(name), {
         headers: {
-            'Cache-Control': 'max-age=60, stale-while-revalidate=3600',
+            // 'Cache-Control': 'max-age=60, stale-while-revalidate=3600',
         },
     })
 }
