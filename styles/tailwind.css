@@ -41,5 +41,10 @@ h3 {
     padding: 6ch 2ch;
 }
 
+.navbar {
+    max-width: 70ch;
+    padding: 2ch;
+}
+
 @tailwind components;
 @tailwind utilities;

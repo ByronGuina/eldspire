@@ -1,4 +1,4 @@
-import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from 'remix'
+import { Link, Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from 'remix'
 import type { MetaFunction, LinksFunction } from 'remix'
 
 import rootStyles from './styles/tailwind.css'
@@ -45,6 +45,11 @@ export default function App() {
                 <Links />
             </head>
             <body>
+                <nav className="navbar">
+                    <Link to="/" prefetch="intent">
+                        Home
+                    </Link>
+                </nav>
                 <Outlet />
                 <ScrollRestoration />
                 <Scripts />
