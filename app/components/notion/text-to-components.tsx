@@ -8,16 +8,17 @@ export function textToComponents(block: NotionBlock) {
 
         if (b.href) {
             // If there's no text that means the page is an internal mention
-            if (!b.text)
+            if (!b.text) {
                 return (
                     <Link
-                        to={`/wiki/${b.href.split('https://www.notion.so/')[1]}`}
+                        to={`/wiki/${b.plain_text}`}
                         className={`${styles} mesmer-focus underline opacity-75`}
                         key={`${b.plain_text}-${i}`}
                     >
                         {b.plain_text}
                     </Link>
                 )
+            }
 
             return (
                 <a

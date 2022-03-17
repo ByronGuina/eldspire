@@ -1,7 +1,7 @@
 import { json, LinksFunction, LoaderFunction, useLoaderData } from 'remix'
 import { fromNotionBlock } from '~/components/notion/block'
 import { NotionBlock } from '~/components/notion/types'
-import { getPage } from '~/db.server'
+import { getPageByName } from '~/db.server'
 import wikiStyles from '~/styles/wiki.css'
 
 export const links: LinksFunction = () => {
@@ -10,21 +10,27 @@ export const links: LinksFunction = () => {
 
 interface LoaderData {
     blocks: NotionBlock[]
+    title: string
 }
 
 export const loader: LoaderFunction = async ({ params }) => {
-    const id = params.id
+    const name = params.id
 
-    if (!id) throw new Error('Id is required')
+    if (!name) throw new Error('Name is required')
 
-    return json(await getPage(id), {
+    return json(await getPageByName(name), {
         headers: {
-            'Cache-Control': 'max-age=3600, stale-while-revalidate=60',
+            // 'Cache-Control': 'max-age=3600, stale-while-revalidate=5',
         },
     })
 }
 
 export default function Page() {
-    const { blocks } = useLoaderData<LoaderData>()
-    return <main className="layout">{blocks.map(fromNotionBlock)}</main>
+    const { blocks, title } = useLoaderData<LoaderData>()
+    return (
+        <main className="layout">
+            <h1>{title}</h1>
+            {blocks.map(fromNotionBlock)}
+        </main>
+    )
 }
