@@ -16,6 +16,17 @@ export async function getFrontPage() {
     return results.results
 }
 
+type WikiPageInfo = {
+    properties: {
+        Name: {
+            title: {
+                plain_text: string
+            }[]
+        }
+        slug: {}
+    }
+}
+
 export async function getPageByName(name: string) {
     const page = await notion.databases.query({
         database_id: DATABASE_ID,
@@ -40,5 +51,12 @@ export async function getPage(id: string) {
         throw new Error('Empty block')
     }
 
-    return results.results
+    const pageInfo = (await notion.pages.retrieve({
+        page_id: id,
+    })) as unknown as WikiPageInfo
+
+    return {
+        title: pageInfo.properties.Name.title[0].plain_text,
+        blocks: results.results,
+    }
 }

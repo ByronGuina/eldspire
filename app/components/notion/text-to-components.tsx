@@ -11,7 +11,7 @@ export function textToComponents(block: NotionBlock) {
             if (!b.text) {
                 return (
                     <Link
-                        to={`/wiki/${b.plain_text}`}
+                        to={`/wiki/${b.href.split('https://www.notion.so/')[1]}`}
                         className={`${styles} mesmer-focus underline opacity-75`}
                         key={`${b.plain_text}-${i}`}
                     >
