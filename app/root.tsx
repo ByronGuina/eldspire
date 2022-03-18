@@ -1,5 +1,6 @@
-import { Link, Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from 'remix'
+import { Link, Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useTransition } from 'remix'
 import type { MetaFunction, LinksFunction } from 'remix'
+import { AnimatePresence, motion } from 'framer-motion'
 
 import rootStyles from './styles/tailwind.css'
 
@@ -12,6 +13,8 @@ export const links: LinksFunction = () => {
 }
 
 export default function App() {
+    const isTransitioningPages = useTransition().state === 'loading'
+
     return (
         <html lang="en">
             <head>
@@ -50,7 +53,13 @@ export default function App() {
                         Home
                     </Link>
                 </nav>
-                <Outlet />
+                <AnimatePresence>
+                    {!isTransitioningPages ? (
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                            <Outlet />
+                        </motion.div>
+                    ) : null}
+                </AnimatePresence>
                 <ScrollRestoration />
                 <Scripts />
                 <LiveReload />

@@ -13,8 +13,6 @@ const componentMap: Record<NotionBlockType, (block: NotionBlock) => JSX.Element>
 }
 
 export function fromNotionBlock(block: NotionBlock) {
-    console.log(block)
-
     const renderComponent = componentMap[block.type]
 
     if (block.type === 'bulleted_list_item') {
