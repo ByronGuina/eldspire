@@ -25,7 +25,7 @@ export type NotionMentionBlock = {
     href: string
 }
 
-export type NotionBlockType = 'paragraph' | 'heading_1' | 'heading_2' | 'heading_3' | 'mention'
+export type NotionBlockType = 'paragraph' | 'heading_1' | 'heading_2' | 'heading_3' | 'mention' | 'bulleted_list_item'
 
 // TODO: implement other block types
 export type NotionBlock = {
@@ -41,6 +41,9 @@ export type NotionBlock = {
         rich_text: NotionTextBlock[]
     }
     heading_3?: {
+        rich_text: NotionTextBlock[]
+    }
+    bulleted_list_item?: {
         rich_text: NotionTextBlock[]
     }
     mention?: {
