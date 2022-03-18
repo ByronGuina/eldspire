@@ -42,7 +42,8 @@ h3 {
 }
 
 .navbar {
-    max-width: 70ch;
+    margin: auto;
+    max-width: 100ch;
     padding: 2ch;
 }
 
