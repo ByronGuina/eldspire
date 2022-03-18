@@ -12,7 +12,7 @@ export function textToComponents(block: NotionBlock) {
                 return (
                     <Link
                         to={`/wiki/${b.href.split('https://www.notion.so/')[1]}`}
-                        className={`${styles} mesmer-focus underline opacity-75`}
+                        className={`${styles} underline opacity-80 hover:opacity-60 transition-colors duration-150`}
                         key={`${b.plain_text}-${i}`}
                     >
                         {b.plain_text}
@@ -25,7 +25,7 @@ export function textToComponents(block: NotionBlock) {
                     href={b.href}
                     target="_blank"
                     rel="noreferrer"
-                    className={`${styles} mesmer-focus`}
+                    className={`${styles}`}
                     key={`${b.text.content}-${i}`}
                 >
                     {b.text.content}
