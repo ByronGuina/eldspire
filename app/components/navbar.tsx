@@ -63,14 +63,14 @@ function SearchModal({}, ref: Ref<HTMLInputElement>) {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 0.4 }}
                 exit={{ opacity: 0 }}
-                transition={{ type: 'spring', mass: 1, damping: 20, stiffness: 200 }}
+                transition={{ type: 'spring', mass: 0.1, damping: 20, stiffness: 400 }}
                 className="absolute left-0 top-0 w-full h-full bg-text z-10"
             />
             <motion.input
                 initial={{ opacity: 0, y: -10, scale: 0.95 }}
                 animate={{ opacity: 1, y: 10, scale: 1 }}
                 exit={{ opacity: 0, y: -10, scale: 1.05 }}
-                transition={{ type: 'spring', mass: 1, damping: 20, stiffness: 200 }}
+                transition={{ type: 'spring', mass: 0.1, damping: 20, stiffness: 400 }}
                 ref={ref}
                 type="search"
                 placeholder="Eldspire, Baalam Pixal"
