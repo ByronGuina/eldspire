@@ -1,5 +1,5 @@
 import { json, LinksFunction, LoaderFunction, useLoaderData } from 'remix'
-import { Block, fromNotionBlock } from '~/components/notion/block'
+import { Block } from '~/components/notion/block'
 import { NotionBlock } from '~/components/notion/types'
 import { getPage } from '~/db.server'
 import wikiStyles from '~/styles/wiki.css'
