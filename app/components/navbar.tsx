@@ -50,16 +50,23 @@ export function Navbar() {
                 <button onClick={toggle} className="focus" placeholder="Search for pages">
                     Search
                 </button>
-                <AnimatePresence exitBeforeEnter>{isOpen && <Search ref={ref} />}</AnimatePresence>
+                <AnimatePresence exitBeforeEnter>
+                    {isOpen && <Search onBackgroundClick={toggle} ref={ref} />}
+                </AnimatePresence>
             </div>
         </nav>
     )
 }
 
-function SearchModal({}, ref: Ref<HTMLInputElement>) {
+interface SearchModalProps {
+    onBackgroundClick: () => void
+}
+
+function SearchModal({ onBackgroundClick }: SearchModalProps, ref: Ref<HTMLInputElement>) {
     return (
         <div className="absolute left-0 top-0 w-screen h-screen flex">
             <motion.div
+                onClick={onBackgroundClick}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 0.4 }}
                 exit={{ opacity: 0 }}
@@ -80,4 +87,4 @@ function SearchModal({}, ref: Ref<HTMLInputElement>) {
     )
 }
 
-export const Search = forwardRef<HTMLInputElement, {}>(SearchModal)
+export const Search = forwardRef<HTMLInputElement, SearchModalProps>(SearchModal)
