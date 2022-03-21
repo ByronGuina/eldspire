@@ -1,23 +1,22 @@
-import { Heading } from './heading'
-import { ListItem } from './list-item'
-import { Paragraph } from './paragraph'
-import { NotionBlock, NotionBlockType } from './types'
+import { textToComponents } from './text-to-components'
+import { NotionBlock } from './types'
 
-const componentMap: Record<NotionBlockType, (block: NotionBlock) => JSX.Element> = {
-    paragraph: (block: NotionBlock) => <Paragraph key={block.id} block={block} />,
-    heading_1: (block: NotionBlock) => <Heading key={block.id} block={block} />,
-    heading_2: (block: NotionBlock) => <Heading key={block.id} block={block} />,
-    heading_3: (block: NotionBlock) => <Heading key={block.id} block={block} />,
-    mention: (block: NotionBlock) => <Paragraph key={block.id} block={block} />,
-    bulleted_list_item: (block: NotionBlock) => <ListItem key={block.id} block={block} />,
+const toHtmlTag = {
+    heading_1: 'h1',
+    heading_2: 'h2',
+    heading_3: 'h3',
+    paragraph: 'p',
+    bulleted_list_item: 'li',
 }
 
 export function fromNotionBlock(block: NotionBlock) {
-    const renderComponent = componentMap[block.type]
+    const blockType = block.type as keyof typeof toHtmlTag
+    const Tag = toHtmlTag[blockType] as keyof JSX.IntrinsicElements
+    const children = textToComponents(block)
 
     if (block.type === 'bulleted_list_item') {
-        return <ul>{renderComponent(block)}</ul>
+        return <Tag>{children}</Tag>
     }
 
-    return renderComponent(block)
+    return <Tag>{children}</Tag>
 }
