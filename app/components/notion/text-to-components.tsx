@@ -8,7 +8,6 @@ export function textToComponents(block: NotionBlock) {
 
         if (b.href) {
             if (b.type === 'mention') {
-                // TODO: Somehow resolve pageId to slug
                 return (
                     <Link
                         to={`/rewrite/${b.mention?.page.id}`}

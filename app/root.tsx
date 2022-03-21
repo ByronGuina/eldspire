@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 
 import rootStyles from './styles/tailwind.css'
 import React from 'react'
+import { Navbar } from './components/navbar'
 
 export const meta: MetaFunction = () => {
     return { title: 'Eldspire | A Fantasy World' }
@@ -76,11 +77,7 @@ function Document({ children }: { children: React.ReactNode }) {
 function Layout({ children }: { children: React.ReactNode }) {
     return (
         <div>
-            <nav className="navbar">
-                <Link to="/" prefetch="intent">
-                    Home
-                </Link>
-            </nav>
+            <Navbar />
             <main className="layout">{children}</main>
         </div>
     )

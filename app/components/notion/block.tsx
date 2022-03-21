@@ -15,7 +15,11 @@ export function Block({ block }: { block: NotionBlock }) {
     const children = textToComponents(block)
 
     if (block.type === 'bulleted_list_item') {
-        return <ul>{children}</ul>
+        return (
+            <ul>
+                <Tag>{children}</Tag>
+            </ul>
+        )
     }
 
     return <Tag>{children}</Tag>

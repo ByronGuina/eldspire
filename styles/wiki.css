@@ -14,3 +14,8 @@ h2 {
 h3 {
     @apply font-semibold text-2xl mb-4 mt-12;
 }
+
+li {
+    list-style-type: circle;
+    margin-bottom: 0.4625rem;
+}
