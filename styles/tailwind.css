@@ -47,5 +47,9 @@ h3 {
     padding: 2ch;
 }
 
+.focus {
+    @apply outline-none focus:ring ring-offset-transparent ring-text ring-opacity-75;
+}
+
 @tailwind components;
 @tailwind utilities;

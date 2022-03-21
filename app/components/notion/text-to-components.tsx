@@ -11,7 +11,7 @@ export function textToComponents(block: NotionBlock) {
                 return (
                     <Link
                         to={`/rewrite/${b.mention?.page.id}`}
-                        className={`${styles} underline opacity-80 hover:opacity-60 transition-colors duration-150`}
+                        className={`${styles} underline opacity-80 hover:opacity-60 transition-colors duration-150 focus`}
                         key={`${b.plain_text}-${i}`}
                     >
                         {b.plain_text}
@@ -24,7 +24,7 @@ export function textToComponents(block: NotionBlock) {
                     href={b.href}
                     target="_blank"
                     rel="noreferrer"
-                    className={`${styles}`}
+                    className={`${styles} focus`}
                     key={`${b.text.content}-${i}`}
                 >
                     {b.text.content}

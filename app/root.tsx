@@ -63,7 +63,7 @@ function Document({ children }: { children: React.ReactNode }) {
                 <Meta />
                 <Links />
             </head>
-            <body>
+            <body className="relative">
                 <Layout>{children}</Layout>
 
                 <ScrollRestoration />
