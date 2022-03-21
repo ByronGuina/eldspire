@@ -7,11 +7,11 @@ export function textToComponents(block: NotionBlock) {
         const styles = getStyles(b.annotations)
 
         if (b.href) {
-            // If there's no text that means the page is an internal mention
-            if (!b.text) {
+            if (b.type === 'mention') {
+                // TODO: Somehow resolve pageId to slug
                 return (
                     <Link
-                        to={`/wiki/${b.href.split('https://www.notion.so/')[1]}`}
+                        to={`/rewrite/${b.mention?.page.id}`}
                         className={`${styles} underline opacity-80 hover:opacity-60 transition-colors duration-150`}
                         key={`${b.plain_text}-${i}`}
                     >

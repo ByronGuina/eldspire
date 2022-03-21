@@ -1,7 +1,7 @@
 import { json, LinksFunction, LoaderFunction, useLoaderData } from 'remix'
 import { Block } from '~/components/notion/block'
 import { NotionBlock } from '~/components/notion/types'
-import { getPage } from '~/db.server'
+import { getPageBySlug } from '~/db.server'
 import wikiStyles from '~/styles/wiki.css'
 
 export const links: LinksFunction = () => {
@@ -14,11 +14,11 @@ interface LoaderData {
 }
 
 export const loader: LoaderFunction = async ({ params }) => {
-    const id = params.id
+    const slug = params.slug
 
-    if (!id) throw new Error('id is required')
+    if (!slug) throw new Error('slug is required')
 
-    return json(await getPage(id), {
+    return json(await getPageBySlug(slug), {
         headers: {
             // 'Cache-Control': 'max-age=60, stale-while-revalidate=3600',
         },
