@@ -1,5 +1,5 @@
 import { json, LinksFunction, LoaderFunction, useLoaderData } from 'remix'
-import { fromNotionBlock } from '~/components/notion/block'
+import { Block, fromNotionBlock } from '~/components/notion/block'
 import { NotionBlock } from '~/components/notion/types'
 import { getPage } from '~/db.server'
 import wikiStyles from '~/styles/wiki.css'
@@ -30,7 +30,9 @@ export default function Page() {
     return (
         <main className="layout">
             <h1>{title}</h1>
-            {blocks.map(fromNotionBlock)}
+            {blocks.map(b => (
+                <Block block={b} />
+            ))}
         </main>
     )
 }

@@ -9,7 +9,7 @@ const toHtmlTag = {
     bulleted_list_item: 'li',
 }
 
-export function fromNotionBlock(block: NotionBlock) {
+export function Block({ block }: { block: NotionBlock }) {
     const blockType = block.type as keyof typeof toHtmlTag
     const Tag = toHtmlTag[blockType] as keyof JSX.IntrinsicElements
     const children = textToComponents(block)

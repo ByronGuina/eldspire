@@ -1,5 +1,6 @@
 import { json, LoaderFunction, useLoaderData } from 'remix'
-import { fromNotionBlock } from '~/components/notion/block'
+import { Block } from '~/components/notion/block'
+import { NotionBlock } from '~/components/notion/types'
 import { getFrontPage } from '~/db.server'
 
 export const loader: LoaderFunction = async () => {
@@ -11,6 +12,12 @@ export const loader: LoaderFunction = async () => {
 }
 
 export default function Index() {
-    const blocks = useLoaderData()
-    return <main className="layout">{blocks.map(fromNotionBlock)}</main>
+    const blocks = useLoaderData<NotionBlock[]>()
+    return (
+        <main className="layout">
+            {blocks.map(b => (
+                <Block block={b} />
+            ))}
+        </main>
+    )
 }
