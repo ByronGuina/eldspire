@@ -16,7 +16,7 @@ interface LoaderData {
 export const loader: LoaderFunction = async ({ params }) => {
     const slug = params.slug
 
-    if (!slug) throw new Error('slug is required')
+    if (!slug) throw new Response('Not found', { status: 404, statusText: 'No slug was found in the loader' })
 
     return json(await getPageBySlug(slug), {
         headers: {
@@ -28,11 +28,11 @@ export const loader: LoaderFunction = async ({ params }) => {
 export default function Page() {
     const { blocks, title } = useLoaderData<LoaderData>()
     return (
-        <main className="layout">
+        <>
             <h1>{title}</h1>
             {blocks.map(b => (
                 <Block block={b} />
             ))}
-        </main>
+        </>
     )
 }

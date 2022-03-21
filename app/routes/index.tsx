@@ -14,10 +14,10 @@ export const loader: LoaderFunction = async () => {
 export default function Index() {
     const blocks = useLoaderData<NotionBlock[]>()
     return (
-        <main className="layout">
+        <>
             {blocks.map(b => (
                 <Block block={b} />
             ))}
-        </main>
+        </>
     )
 }

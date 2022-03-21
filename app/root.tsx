@@ -1,8 +1,9 @@
-import { Link, Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useTransition } from 'remix'
+import { Link, Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useCatch, useTransition } from 'remix'
 import type { MetaFunction, LinksFunction } from 'remix'
 import { AnimatePresence, motion } from 'framer-motion'
 
 import rootStyles from './styles/tailwind.css'
+import React from 'react'
 
 export const meta: MetaFunction = () => {
     return { title: 'Eldspire | A Fantasy World' }
@@ -15,6 +16,20 @@ export const links: LinksFunction = () => {
 export default function App() {
     const isTransitioningPages = useTransition().state === 'loading'
 
+    return (
+        <Document>
+            <AnimatePresence>
+                {!isTransitioningPages ? (
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                        <Outlet />
+                    </motion.div>
+                ) : null}
+            </AnimatePresence>
+        </Document>
+    )
+}
+
+function Document({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en">
             <head>
@@ -48,22 +63,41 @@ export default function App() {
                 <Links />
             </head>
             <body>
-                <nav className="navbar">
-                    <Link to="/" prefetch="intent">
-                        Home
-                    </Link>
-                </nav>
-                <AnimatePresence>
-                    {!isTransitioningPages ? (
-                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                            <Outlet />
-                        </motion.div>
-                    ) : null}
-                </AnimatePresence>
+                <Layout>{children}</Layout>
+
                 <ScrollRestoration />
                 <Scripts />
                 <LiveReload />
             </body>
         </html>
+    )
+}
+
+function Layout({ children }: { children: React.ReactNode }) {
+    return (
+        <div>
+            <nav className="navbar">
+                <Link to="/" prefetch="intent">
+                    Home
+                </Link>
+            </nav>
+            <main className="layout">{children}</main>
+        </div>
+    )
+}
+
+export function CatchBoundary() {
+    return (
+        <Document>
+            <p>Uh oh, looks like something went wrong. Our bad. Hit the Home button to go back to the wiki.</p>
+        </Document>
+    )
+}
+
+export function ErrorBoundary() {
+    return (
+        <Document>
+            <p>Uh oh, looks like something went wrong. Our bad. Hit the Home button to go back to the wiki.</p>
+        </Document>
     )
 }

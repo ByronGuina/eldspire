@@ -39,7 +39,10 @@ export async function getPageBySlug(slug: string) {
         },
     })
 
-    console.log(page)
+    if (page.results.length === 0) {
+        throw new Response('Page not found', { status: 404 })
+    }
+
     const fullPage = await getPage(page.results[0].id)
 
     return {
@@ -54,7 +57,7 @@ export async function pageIdToSlug(id: string) {
     })) as unknown as WikiPageInfo
 
     if (!pageInfo.properties.slug) {
-        throw new Error('No slug defined in Notion')
+        throw new Response('Page not found', { status: 404 })
     }
 
     return pageInfo.properties.slug.rich_text[0].plain_text
