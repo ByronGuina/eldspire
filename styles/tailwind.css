@@ -56,5 +56,16 @@ h3 {
     @apply outline-none focus:ring ring-offset-transparent ring-text ring-opacity-75;
 }
 
+/* Disable iOS specific styling applied to elements */
+input[type='search'] {
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
+}
+
+input {
+    border-radius: 0;
+    -webkit-appearance: none;
+}
+
 @tailwind components;
 @tailwind utilities;
