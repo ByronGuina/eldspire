@@ -11,7 +11,7 @@ export const loader: LoaderFunction = async ({ params }) => {
 
     return redirect(`wiki/${slug}`, {
         headers: {
-            'Cache-Control': 'max-age=3600, stale-while-revalidate=3600',
+            'Cache-Control': 'max-age=15770000, stale-while-revalidate=60',
         },
     })
 }
