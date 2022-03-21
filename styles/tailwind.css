@@ -47,6 +47,11 @@ h3 {
     padding: 2ch;
 }
 
+.search {
+    margin: auto;
+    max-width: 64ch;
+}
+
 .focus {
     @apply outline-none focus:ring ring-offset-transparent ring-text ring-opacity-75;
 }

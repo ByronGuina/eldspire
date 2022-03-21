@@ -113,18 +113,18 @@ function SearchModal({ onBackgroundClick }: SearchModalProps, ref: Ref<HTMLInput
                 animate={{ opacity: 1, y: 10, scale: 1 }}
                 exit={{ opacity: 0, y: -10, scale: 1.05 }}
                 transition={{ type: 'spring', mass: 0.1, damping: 20, stiffness: 400 }}
-                className="m-auto border border-text w-1/3 bg-background z-30 mt-24"
+                className="search border border-text w-full bg-background z-30 mt-24"
             >
                 <input
                     ref={ref}
                     type="search"
                     placeholder="Eldspire, Baalam Pixal"
-                    className="bg-transparent w-full px-4 py-3 focus placeholder-text placeholder-opacity-40"
+                    className="bg-transparent w-full px-4 py-3 mb-4 focus placeholder-text placeholder-opacity-40"
                 />
                 <div>
                     <ul>
                         {results.map(result => (
-                            <Link prefetch="intent" to={`/wiki/${result.slug}`} className="focus block px-4 py-3">
+                            <Link prefetch="intent" to={`/wiki/${result.slug}`} className="focus block px-4 py-2">
                                 <li className="list-none">{result.title}</li>
                             </Link>
                         ))}
