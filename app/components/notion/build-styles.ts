@@ -1,6 +1,7 @@
 import { NotionTextBlock } from './types'
 
-// This lets us build the styles in the thought.css file instead
+// TODO: This can be passed as a style resolver from the consumer. This
+// would let us let the consumer specify how to style inline text styles.
 export function getStyles(annotations: NotionTextBlock['annotations']) {
     let styles = ``
 
