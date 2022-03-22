@@ -29,7 +29,7 @@ export type NotionMentionBlock = {
     href: string
 }
 
-export type NotionBlockType = 'paragraph' | 'heading_1' | 'heading_2' | 'heading_3' | 'bulleted_list_item'
+export type NotionBlockType = 'paragraph' | 'heading_1' | 'heading_2' | 'heading_3' | 'bulleted_list_item' | 'image'
 
 // TODO: implement other block types
 export type NotionBlock = {
@@ -49,6 +49,11 @@ export type NotionBlock = {
     }
     bulleted_list_item?: {
         rich_text: NotionTextBlock[]
+    }
+    image: {
+        file: {
+            url: string
+        }
     }
 }
 

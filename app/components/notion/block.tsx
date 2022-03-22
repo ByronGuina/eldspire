@@ -14,6 +14,10 @@ export function Block({ block }: { block: NotionBlock }) {
     const Tag = toHtmlTag[blockType] as keyof JSX.IntrinsicElements
     const children = textToComponents(block)
 
+    if (block.type === 'image') {
+        return <img src={block.image.file.url} />
+    }
+
     if (block.type === 'bulleted_list_item') {
         return (
             <ul>

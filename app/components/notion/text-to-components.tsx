@@ -3,6 +3,8 @@ import { getStyles } from './build-styles'
 import { NotionBlock } from './types'
 
 export function textToComponents(block: NotionBlock) {
+    if (block.type === 'image') return
+
     const children = block[block.type]?.rich_text.map((b, i) => {
         const styles = getStyles(b.annotations)
 
