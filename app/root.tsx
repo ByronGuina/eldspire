@@ -20,7 +20,12 @@ import { getPageLinks, PageLink } from './db.server'
 import { useIsomorphicSearch, useSearch } from './state'
 
 export const meta: MetaFunction = () => {
-    return { title: 'Eldspire | A Fantasy World' }
+    return {
+        title: 'Eldspire | A Fantasy World',
+        'og:title': 'Eldspire | A Fantasy World',
+        url: 'https://eldspire.com',
+        'og:url': 'https://eldspire.com',
+    }
 }
 
 export const links: LinksFunction = () => {
