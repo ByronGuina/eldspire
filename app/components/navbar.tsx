@@ -1,5 +1,5 @@
-import { AnimatePresence, motion } from 'framer-motion'
-import { useEffect, useRef, useState, Ref, forwardRef } from 'react'
+import { AnimatePresence } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'remix'
 import { Search } from './search'
 

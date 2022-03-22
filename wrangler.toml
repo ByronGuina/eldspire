@@ -1,0 +1,31 @@
+name = "eldspire-dev"
+type = "javascript"
+
+zone_id = ""
+account_id = "8b93f55d789ec0bf3affaffe69b1f22e"
+route = ""
+workers_dev = true
+vars = { ENVIRONMENT = "dev" }
+
+[env.preview]
+name = "eldspire-preview"
+vars = { ENVIRONMENT = "preview" }
+
+[env.staging]
+name = "eldspire-staging"
+vars = { ENVIRONMENT = "staging" }
+
+[env.production]
+name = "eldspire"
+vars = { ENVIRONMENT = "production" }
+
+[site]
+bucket = "./public"
+entry-point = "."
+
+[build]
+command = "npm run worker:build"
+watch_dir = "build/index.js"
+
+[build.upload]
+format="service-worker"

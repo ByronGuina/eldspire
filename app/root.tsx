@@ -17,7 +17,7 @@ import rootStyles from './styles/tailwind.css'
 import React from 'react'
 import { Navbar } from './components/navbar'
 import { getPageLinks, PageLink } from './db.server'
-import { useIsomorphicSearch, useSearch } from './state'
+import { useIsomorphicSearch } from './state'
 
 export const meta: MetaFunction = () => {
     const title = 'Eldspire | A Fantasy World'
@@ -71,8 +71,8 @@ function Document({ children }: { children: React.ReactNode }) {
 
                 {/* Essential for socials */}
                 {/* <title></title> */}
-                <meta name="description" content="Wiki site for the Eldspire fantasy universe." />
                 {/* <meta property="og:title" content={title} /> */}
+                <meta name="description" content="Wiki site for the Eldspire fantasy universe." />
                 <meta property="og:description" content="Wiki site for the Eldspire fantasy universe." />
                 <meta name="twitter:card" content="summary_large_image" />
                 {/* TODO: Base image off image in content -- once library is open. Prob will come from CDN */}
@@ -96,7 +96,7 @@ function Document({ children }: { children: React.ReactNode }) {
 
                 <ScrollRestoration />
                 <Scripts />
-                <LiveReload />
+                {/* {process.env.NODE_ENV === 'development' && <LiveReload />} */}
             </body>
         </html>
     )
