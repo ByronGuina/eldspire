@@ -21,6 +21,7 @@ specifiers:
   remix: ^1.2.3
   tailwindcss: ^3.0.23
   typescript: ^4.5.5
+  zustand: ^3.7.1
 
 dependencies:
   '@notionhq/client': 1.0.4
@@ -31,6 +32,7 @@ dependencies:
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
   remix: 1.2.3
+  zustand: 3.7.1_react@17.0.2
 
 devDependencies:
   '@remix-run/dev': 1.2.3_react-dom@17.0.2+react@17.0.2
@@ -5381,6 +5383,18 @@ packages:
       y18n: 5.0.8
       yargs-parser: 21.0.1
     dev: true
+
+  /zustand/3.7.1_react@17.0.2:
+    resolution: {integrity: sha512-wHBCZlKj+bg03/hP+Tzv24YhnqqP8MCeN9ECPDXoF01062SIbnfl3j9O0znkDw1lNTY0a8WN3F///a0UhhaEqg==}
+    engines: {node: '>=12.7.0'}
+    peerDependencies:
+      react: '>=16.8'
+    peerDependenciesMeta:
+      react:
+        optional: true
+    dependencies:
+      react: 17.0.2
+    dev: false
 
   /zwitch/2.0.2:
     resolution: {integrity: sha512-JZxotl7SxAJH0j7dN4pxsTV6ZLXoLdGME+PsjkL/DaBrVryK9kTGq06GfKrwcSOqypP+fdXGoCHE36b99fWVoA==}

@@ -16,7 +16,7 @@ export default function Index() {
     return (
         <>
             {blocks.map(b => (
-                <Block block={b} />
+                <Block key={b.id} block={b} />
             ))}
         </>
     )

@@ -1,6 +1,8 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useRef, useState, Ref, forwardRef } from 'react'
-import { Link } from 'remix'
+import { Link, useFetcher } from 'remix'
+import { PageLink } from '~/db.server'
+import { useSearch } from '~/state'
 
 function useSearchModal(initialValue = false) {
     const [isOpen, setIsOpen] = useState(initialValue)
@@ -58,9 +60,8 @@ export function Navbar() {
     )
 }
 
-type Result = {
-    title: string
-    slug: string
+interface SearchModalProps {
+    onBackgroundClick: () => void
 }
 
 const defaultResults = [
@@ -75,28 +76,24 @@ const defaultResults = [
 ]
 
 function useQuery() {
+    const pages = useSearch(state => state.results)
     const [query, setQuery] = useState('')
-    const [results, setResults] = useState<Result[]>(defaultResults)
+    const [results, setResults] = useState<PageLink[]>(defaultResults)
 
-    // TODO: Debounce
-    // TODO: Use a remix form/action
     useEffect(() => {
-        // TODO: Request results from the server
+        if (query === '') setResults(defaultResults)
+        else setResults(pages.filter(page => page.title.toLowerCase().includes(query.toLowerCase())))
     }, [query])
 
     return {
         query,
         setQuery,
-        results: results.length === 0 ? defaultResults : results,
+        results: results.length > 0 ? results : defaultResults,
     }
 }
 
-interface SearchModalProps {
-    onBackgroundClick: () => void
-}
-
 function SearchModal({ onBackgroundClick }: SearchModalProps, ref: Ref<HTMLInputElement>) {
-    const { results } = useQuery()
+    const { query, setQuery, results } = useQuery()
 
     return (
         <div className="absolute left-0 top-0 w-screen h-screen flex">
@@ -117,18 +114,30 @@ function SearchModal({ onBackgroundClick }: SearchModalProps, ref: Ref<HTMLInput
             >
                 <input
                     ref={ref}
+                    value={query}
+                    onChange={e => setQuery(e.target.value)}
                     type="search"
                     placeholder="Eldspire, Baalam Pixal"
                     className="bg-transparent w-full px-4 py-3 mb-4 focus placeholder-text placeholder-opacity-40"
                 />
+
                 <div>
-                    <ul>
-                        {results.map(result => (
-                            <Link prefetch="intent" to={`/wiki/${result.slug}`} className="focus block px-4 py-2">
-                                <li className="list-none">{result.title}</li>
-                            </Link>
-                        ))}
-                    </ul>
+                    {results.length > 0 ? (
+                        <ul>
+                            {results.map((page: PageLink) => (
+                                <Link
+                                    key={page.slug}
+                                    prefetch="intent"
+                                    to={`/wiki/${page.slug}`}
+                                    className="focus block px-4 py-2"
+                                >
+                                    <li className="list-none">{page.title}</li>
+                                </Link>
+                            ))}
+                        </ul>
+                    ) : (
+                        <p className="px-4 py-2">Can't find any wiki pages. Try another search.</p>
+                    )}
                 </div>
             </motion.div>
         </div>

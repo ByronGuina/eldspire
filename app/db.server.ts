@@ -81,3 +81,38 @@ export async function getPage(id: string) {
         blocks: results.results,
     }
 }
+
+export async function searchPages(name: string) {
+    const pages = await notion.databases.query({
+        database_id: DATABASE_ID,
+        filter: {
+            property: 'Name',
+            title: { contains: name },
+        },
+    })
+
+    const results = pages.results as unknown as WikiPageInfo[]
+
+    return results.map(p => ({
+        title: p.properties.Name.title[0].plain_text,
+        slug: p.properties.slug.rich_text[0].plain_text,
+    }))
+}
+
+export type PageLink = {
+    title: string
+    slug: string
+}
+
+export async function getPageLinks(): Promise<PageLink[]> {
+    const pages = await notion.databases.query({
+        database_id: DATABASE_ID,
+    })
+
+    const results = pages.results as unknown as WikiPageInfo[]
+
+    return results.map(p => ({
+        title: p.properties.Name.title[0].plain_text,
+        slug: p.properties.slug.rich_text[0].plain_text,
+    }))
+}

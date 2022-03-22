@@ -1,10 +1,23 @@
-import { Link, Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useCatch, useTransition } from 'remix'
+import {
+    json,
+    Links,
+    LiveReload,
+    LoaderFunction,
+    Meta,
+    Outlet,
+    Scripts,
+    ScrollRestoration,
+    useLoaderData,
+    useTransition,
+} from 'remix'
 import type { MetaFunction, LinksFunction } from 'remix'
 import { AnimatePresence, motion } from 'framer-motion'
 
 import rootStyles from './styles/tailwind.css'
 import React from 'react'
 import { Navbar } from './components/navbar'
+import { getPageLinks, PageLink } from './db.server'
+import { useIsomorphicSearch, useSearch } from './state'
 
 export const meta: MetaFunction = () => {
     return { title: 'Eldspire | A Fantasy World' }
@@ -14,8 +27,15 @@ export const links: LinksFunction = () => {
     return [{ rel: 'stylesheet', href: rootStyles }]
 }
 
+export const loader: LoaderFunction = async ({ request }) => {
+    const pages = await getPageLinks()
+    return json(pages)
+}
+
 export default function App() {
+    const pages = useLoaderData<PageLink[]>()
     const isTransitioningPages = useTransition().state === 'loading'
+    useIsomorphicSearch(pages)
 
     return (
         <Document>

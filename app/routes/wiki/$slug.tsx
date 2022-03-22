@@ -31,7 +31,7 @@ export default function Page() {
         <>
             <h1>{title}</h1>
             {blocks.map(b => (
-                <Block block={b} />
+                <Block key={b.id} block={b} />
             ))}
         </>
     )
