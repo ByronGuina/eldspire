@@ -5,7 +5,7 @@ module.exports = {
     },
     theme: {
         fontFamily: {
-            serif: ['Newsreader', 'serif'],
+            serif: ['"Iowan Old Style"', 'Iowan', 'Newsreader', 'serif'],
         },
         extend: {
             colors: {
