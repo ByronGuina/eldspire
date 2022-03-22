@@ -15,7 +15,7 @@ export function Block({ block }: { block: NotionBlock }) {
     const children = textToComponents(block)
 
     if (block.type === 'image') {
-        return <img src={block.image.file.url} />
+        return <img className="rounded" src={block.image.file.url} />
     }
 
     if (block.type === 'bulleted_list_item') {

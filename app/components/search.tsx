@@ -54,7 +54,7 @@ function SearchModal({ onBackgroundClick }: SearchModalProps, ref: Ref<HTMLInput
                 animate={{ opacity: 1, y: 10, scale: 1 }}
                 exit={{ opacity: 0, y: -10, scale: 1.05 }}
                 transition={{ type: 'spring', mass: 0.1, damping: 20, stiffness: 400 }}
-                className="search border border-text w-full bg-background z-30 mt-24"
+                className="search border border-text w-full bg-background z-30 mt-24 rounded"
             >
                 <input
                     ref={ref}
