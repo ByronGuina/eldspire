@@ -43,7 +43,7 @@ export async function getPageBySlug(slug: string) {
         throw new Response('Page not found', { status: 404 })
     }
 
-    const fullPage = await getPage(page.results[0].id)
+    const fullPage = await getPageContent(page.results[0].id)
 
     return {
         blocks: fullPage.blocks,
@@ -63,7 +63,7 @@ export async function pageIdToSlug(id: string) {
     return pageInfo.properties.slug.rich_text[0].plain_text
 }
 
-export async function getPage(id: string) {
+export async function getPageContent(id: string) {
     const results = await notion.blocks.children.list({
         block_id: id,
     })
