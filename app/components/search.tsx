@@ -39,14 +39,6 @@ function useQuery() {
 function SearchModal({ onBackgroundClick }: SearchModalProps, ref: Ref<HTMLInputElement>) {
     const { query, setQuery, results } = useQuery()
 
-    const onKeyupNavigate = (e: KeyboardEvent<HTMLAnchorElement>) => {
-        if (e.key === 'Enter') {
-            e.preventDefault()
-            e.stopPropagation()
-            onBackgroundClick()
-        }
-    }
-
     return (
         <div className="absolute left-0 top-0 w-screen h-screen flex">
             <motion.div
@@ -79,7 +71,7 @@ function SearchModal({ onBackgroundClick }: SearchModalProps, ref: Ref<HTMLInput
                             {results.map((page: PageLink) => (
                                 <Link
                                     onClickCapture={onBackgroundClick}
-                                    onKeyUpCapture={onKeyupNavigate}
+                                    onKeyUpCapture={e => e.key === 'Enter' && onBackgroundClick()}
                                     key={page.slug}
                                     prefetch="intent"
                                     to={`/wiki/${page.slug}`}
