@@ -71,8 +71,8 @@ function Document({ children }: { children: React.ReactNode }) {
 
                 {/* Essential for socials */}
                 {/* <title></title> */}
-                <meta name="description" content="Wiki site for the Eldspire fantasy universe." />
                 {/* <meta property="og:title" content={title} /> */}
+                <meta name="description" content="Wiki site for the Eldspire fantasy universe." />
                 <meta property="og:description" content="Wiki site for the Eldspire fantasy universe." />
                 <meta name="twitter:card" content="summary_large_image" />
                 {/* TODO: Base image off image in content -- once library is open. Prob will come from CDN */}
