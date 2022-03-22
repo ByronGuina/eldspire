@@ -44,7 +44,7 @@ jobs:
     #           run: pnpm test
 
     deployment:
-        needs: [build, test]
+        needs: [build]
         runs-on: ubuntu-latest
         environment: preview
         name: Deploy to Cloudflare
