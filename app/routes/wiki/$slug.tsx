@@ -1,4 +1,4 @@
-import { json, LinksFunction, LoaderFunction, useLoaderData } from 'remix'
+import { json, LinksFunction, LoaderFunction, MetaFunction, useLoaderData } from 'remix'
 import { Block } from '~/components/notion/block'
 import { NotionBlock } from '~/components/notion/types'
 import { getPageBySlug } from '~/db.server'
@@ -11,6 +11,15 @@ export const links: LinksFunction = () => {
 interface LoaderData {
     blocks: NotionBlock[]
     title: string
+}
+
+export const meta: MetaFunction = ({ data }) => {
+    return {
+        title: `${data.title} | Eldspire`,
+        // TODO:
+        // description
+        // SEO image
+    }
 }
 
 export const loader: LoaderFunction = async ({ params }) => {
