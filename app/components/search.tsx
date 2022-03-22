@@ -39,7 +39,7 @@ function useQuery() {
 function SearchModal({ onBackgroundClick }: SearchModalProps, ref: Ref<HTMLInputElement>) {
     const { query, setQuery, results } = useQuery()
 
-    const onKeyupNavigate = (e: KeyboardEvent) => {
+    const onKeyupNavigate = (e: KeyboardEvent<HTMLAnchorElement>) => {
         if (e.key === 'Enter') {
             e.preventDefault()
             e.stopPropagation()
