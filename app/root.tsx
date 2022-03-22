@@ -17,7 +17,7 @@ import rootStyles from './styles/tailwind.css'
 import React from 'react'
 import { Navbar } from './components/navbar'
 import { getPageLinks, PageLink } from './db.server'
-import { useIsomorphicSearch, useSearch } from './state'
+import { useIsomorphicSearch } from './state'
 
 export const meta: MetaFunction = () => {
     const title = 'Eldspire | A Fantasy World'
@@ -96,7 +96,7 @@ function Document({ children }: { children: React.ReactNode }) {
 
                 <ScrollRestoration />
                 <Scripts />
-                <LiveReload />
+                {/* {process.env.NODE_ENV === 'development' && <LiveReload />} */}
             </body>
         </html>
     )

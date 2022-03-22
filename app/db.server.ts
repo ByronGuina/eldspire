@@ -1,7 +1,7 @@
 import { Client } from '@notionhq/client'
 import { NotionTextBlock } from './components/notion/types'
 
-const notion = new Client({ auth: process.env.NOTION_API_KEY })
+const notion = new Client({ auth: NOTION_API_TOKEN })
 
 const DATABASE_ID = '1c49b767ea344dabb55be7137d867092'
 
