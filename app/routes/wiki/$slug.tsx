@@ -15,8 +15,10 @@ interface LoaderData {
 
 export const meta: MetaFunction = ({ data, location }) => {
     const url = `https://eldspire.com${location.pathname}`
+    const title = `${data.title} | Eldspire`
     return {
-        title: `${data.title} | Eldspire`,
+        title,
+        'og:title': title,
         url,
         'og:url': url,
         // TODO:
