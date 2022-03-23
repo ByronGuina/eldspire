@@ -1,4 +1,4 @@
-import { json, LinksFunction, LoaderFunction, MetaFunction, useLoaderData } from 'remix'
+import { HeadersFunction, json, LinksFunction, LoaderFunction, MetaFunction, useLoaderData } from 'remix'
 import { Block } from '~/components/notion/block'
 import { NotionBlock } from '~/components/notion/types'
 import { getPageBySlug } from '~/db.server'
@@ -27,14 +27,22 @@ export const meta: MetaFunction = ({ data, location }) => {
     }
 }
 
+export const headers: HeadersFunction = () => {
+    return {
+        'Cache-Control': 'public, s-max-age=60, stale-while-revalidate=60, stale-if-error=60',
+    }
+}
+
 export const loader: LoaderFunction = async ({ params }) => {
     const slug = params.slug
 
     if (!slug) throw new Response('Not found', { status: 404, statusText: 'No slug was found in the loader' })
 
-    return json(await getPageBySlug(slug), {
+    const page = await getPageBySlug(slug)
+
+    return json(page, {
         headers: {
-            // 'Cache-Control': 'max-age=604800, stale-while-revalidate=60, stale-if-error=60',
+            'Cache-Control': 'public, s-max-age=60, stale-while-revalidate=60, stale-if-error=60',
         },
     })
 }
@@ -48,5 +56,14 @@ export default function Page() {
                 <Block key={b.id} block={b} />
             ))}
         </div>
+    )
+}
+
+function naiveHash(entity: string) {
+    return (
+        'W/' +
+        `"${entity.split('').reduce((hash, char) => {
+            return (hash << 5) - hash + char.charCodeAt(0)
+        }, 0)}"`
     )
 }
