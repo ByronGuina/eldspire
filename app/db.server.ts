@@ -94,10 +94,14 @@ export async function searchPages(name: string) {
 
     const results = pages.results as unknown as WikiPageInfo[]
 
-    return results.map(p => ({
-        title: p.properties.Name.title[0].plain_text,
-        slug: p.properties.slug?.rich_text[0].plain_text,
-    }))
+    return results.map(p => {
+        const isSlug = Boolean(p.properties.slug.rich_text?.[0])
+
+        return {
+            title: p.properties.Name.title[0].plain_text,
+            slug: isSlug ? p.properties.slug.rich_text[0].plain_text : '',
+        }
+    })
 }
 
 export type PageLink = {
@@ -113,10 +117,14 @@ export async function getPageLinks(): Promise<PageLink[]> {
     const results = pages.results as unknown as WikiPageInfo[]
 
     return results
-        .map(p => ({
-            title: p.properties.Name.title[0].plain_text,
-            slug: p.properties.slug.rich_text[0].plain_text,
-            lastEditedTime: p.last_edited_time,
-        }))
+        .map(p => {
+            const isSlug = Boolean(p.properties.slug.rich_text?.[0])
+
+            return {
+                title: p.properties.Name.title[0].plain_text,
+                slug: isSlug ? p.properties.slug.rich_text?.[0].plain_text : '',
+                lastEditedTime: p.last_edited_time,
+            }
+        })
         .sort((a, b) => new Date(b.lastEditedTime).getTime() - new Date(a.lastEditedTime).getTime())
 }
