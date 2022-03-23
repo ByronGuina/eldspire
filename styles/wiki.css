@@ -22,4 +22,6 @@ li {
 
 img {
     @apply rounded my-8 self-center;
+    width: 100%;
+    object-fit: contain;
 }
