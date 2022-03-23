@@ -7,9 +7,6 @@ export const loader: LoaderFunction = async ({ params, request }) => {
     if (!id) throw new Response('Not found', { status: 404, statusText: 'No id was found in the loader' })
 
     const slug = await pageIdToSlug(id)
-
-    // console.log(request)
-    console.log(request.headers.get('host'))
     const host = request.headers.get('host')
     const http = host?.includes('localhost') ? 'http' : 'https'
 
