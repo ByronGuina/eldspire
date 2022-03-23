@@ -42,11 +42,11 @@ export const loader: LoaderFunction = async ({ params }) => {
 export default function Page() {
     const { blocks, title } = useLoaderData<LoaderData>()
     return (
-        <>
+        <div className="flex flex-col items-center">
             <h1>{title}</h1>
             {blocks.map(b => (
                 <Block key={b.id} block={b} />
             ))}
-        </>
+        </div>
     )
 }

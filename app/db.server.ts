@@ -96,7 +96,7 @@ export async function searchPages(name: string) {
 
     return results.map(p => ({
         title: p.properties.Name.title[0].plain_text,
-        slug: p.properties.slug.rich_text[0].plain_text,
+        slug: p.properties.slug?.rich_text[0].plain_text,
     }))
 }
 
@@ -111,7 +111,6 @@ export async function getPageLinks(): Promise<PageLink[]> {
     })
 
     const results = pages.results as unknown as WikiPageInfo[]
-    console.log(results)
 
     return results
         .map(p => ({
