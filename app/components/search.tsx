@@ -78,7 +78,7 @@ function SearchModal({ onBackgroundClick }: SearchModalProps, ref: Ref<HTMLInput
                                     onClickCapture={onBackgroundClick}
                                     onKeyUpCapture={e => e.key === 'Enter' && onBackgroundClick()}
                                     key={page.slug}
-                                    prefetch="intent"
+                                    // prefetch=""
                                     to={`/wiki/${page.slug}`}
                                     className="focus block px-4 py-2"
                                 >

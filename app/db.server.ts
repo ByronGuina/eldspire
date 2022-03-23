@@ -44,11 +44,14 @@ export async function getPageBySlug(slug: string) {
         throw new Response('Page not found', { status: 404 })
     }
 
+    const results = page.results as unknown as WikiPageInfo[]
+
     const fullPage = await getPageContent(page.results[0].id)
 
     return {
         blocks: fullPage.blocks,
         title: fullPage.title,
+        lastEditedTime: results?.[0].last_edited_time,
     }
 }
 
@@ -100,6 +103,7 @@ export async function searchPages(name: string) {
         return {
             title: p.properties.Name.title[0].plain_text,
             slug: isSlug ? p.properties.slug.rich_text[0].plain_text : '',
+            lastEditedTime: p.last_edited_time,
         }
     })
 }
@@ -127,4 +131,24 @@ export async function getPageLinks(): Promise<PageLink[]> {
             }
         })
         .sort((a, b) => new Date(b.lastEditedTime).getTime() - new Date(a.lastEditedTime).getTime())
+}
+
+// We can use this for ETags and caching non-changed paged
+export async function getPageLastEditedTime(slug: string) {
+    const pages = await notion.databases.query({
+        database_id: DATABASE_ID,
+        filter: {
+            property: 'slug',
+            rich_text: { equals: slug },
+        },
+    })
+
+    const results = pages.results as unknown as WikiPageInfo[]
+    const page = results.find(p => p.properties.slug.rich_text?.[0].plain_text === slug)
+
+    if (!page) {
+        throw new Response('Page cache not found in getPageLastEditedTime', { status: 404 })
+    }
+
+    return page.last_edited_time
 }
