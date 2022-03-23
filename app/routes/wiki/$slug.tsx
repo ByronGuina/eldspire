@@ -43,6 +43,7 @@ export const loader: LoaderFunction = async ({ params, request }) => {
 
     // check if the `If-None-Match` header matches the ETag
     if (request.headers.get('If-None-Match') === hash) {
+        console.log('sending 304s for', slug)
         // and send an empty Response with status 304 and the headers.
         return new Response(null, { status: 304 })
     }
