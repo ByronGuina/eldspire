@@ -25,14 +25,19 @@ function useQuery() {
     const [results, setResults] = useState<PageLink[]>(defaultResults)
 
     useEffect(() => {
-        if (query === '') setResults(defaultResults)
-        else setResults(pages.filter(page => page.title.toLowerCase().includes(query.toLowerCase())))
+        if (query === '') {
+            setResults(pages.slice(0, 10))
+        } else {
+            const filtered = pages.filter(page => page.title.toLowerCase().includes(query.toLowerCase()))
+            const firstTen = filtered.slice(0, 10)
+            setResults(firstTen)
+        }
     }, [query])
 
     return {
         query,
         setQuery,
-        results: results.length > 0 ? results : defaultResults,
+        results,
     }
 }
 

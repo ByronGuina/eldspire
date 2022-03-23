@@ -28,6 +28,7 @@ type WikiPageInfo = {
             rich_text: NotionTextBlock[]
         }
     }
+    last_edited_time: string
 }
 
 export async function getPageBySlug(slug: string) {
@@ -110,9 +111,13 @@ export async function getPageLinks(): Promise<PageLink[]> {
     })
 
     const results = pages.results as unknown as WikiPageInfo[]
+    console.log(results)
 
-    return results.map(p => ({
-        title: p.properties.Name.title[0].plain_text,
-        slug: p.properties.slug.rich_text[0].plain_text,
-    }))
+    return results
+        .map(p => ({
+            title: p.properties.Name.title[0].plain_text,
+            slug: p.properties.slug.rich_text[0].plain_text,
+            lastEditedTime: p.last_edited_time,
+        }))
+        .sort((a, b) => new Date(b.lastEditedTime).getTime() - new Date(a.lastEditedTime).getTime())
 }
