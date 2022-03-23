@@ -4,7 +4,7 @@ p + p {
 }
 
 h1 {
-    @apply font-semibold text-4xl mb-12 mt-12;
+    @apply font-semibold text-4xl mb-12 mt-12 self-center;
 }
 
 h2 {
@@ -18,4 +18,8 @@ h3 {
 li {
     list-style-type: circle;
     margin-bottom: 0.4625rem;
+}
+
+img {
+    @apply rounded my-8 self-center;
 }
