@@ -6,7 +6,7 @@ import { getFrontPage } from '~/db.server'
 export const loader: LoaderFunction = async () => {
     return json(await getFrontPage(), {
         headers: {
-            'Cache-Control': 'publilc, max-age=86400, s-maxage=86400',
+            'Cache-Control': 'public, max-age=86400, s-maxage=86400',
         },
     })
 }
