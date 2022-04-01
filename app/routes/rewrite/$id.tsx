@@ -12,7 +12,7 @@ export const loader: LoaderFunction = async ({ params, request }) => {
 
     return redirect(`${http}://${host}/wiki/${slug}`, {
         headers: {
-            'Cache-Control': 'max-age=15770000',
+            'Cache-Control': 'public, max-age=15770000, s-maxage=15770000',
         },
     })
 }

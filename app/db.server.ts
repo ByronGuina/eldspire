@@ -1,5 +1,5 @@
 import { Client } from '@notionhq/client'
-import { NotionTextBlock } from './components/notion/types'
+import { NotionBlock, NotionTextBlock } from './components/notion/types'
 
 const notion = new Client({ auth: NOTION_API_TOKEN })
 
@@ -31,7 +31,13 @@ type WikiPageInfo = {
     last_edited_time: string
 }
 
-export async function getPageBySlug(slug: string) {
+export type PageFromSlug = {
+    blocks: NotionBlock[]
+    title: string
+    lastEditedTime: string
+}
+
+export async function getPageBySlug(slug: string): Promise<PageFromSlug> {
     const page = await notion.databases.query({
         database_id: DATABASE_ID,
         filter: {
@@ -111,9 +117,10 @@ export async function searchPages(name: string) {
 export type PageLink = {
     title: string
     slug: string
+    lastEditedTime: string
 }
 
-export async function getPageLinks(): Promise<PageLink[]> {
+export async function getPageLinks() {
     const pages = await notion.databases.query({
         database_id: DATABASE_ID,
     })
