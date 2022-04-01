@@ -55,7 +55,7 @@ export async function getPageBySlug(slug: string): Promise<PageFromSlug> {
     const fullPage = await getPageContent(page.results[0].id)
 
     return {
-        blocks: fullPage.blocks,
+        blocks: fullPage.blocks as NotionBlock[],
         title: fullPage.title,
         lastEditedTime: results?.[0].last_edited_time,
     }
