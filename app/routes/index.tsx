@@ -1,7 +1,9 @@
-import { json, LoaderFunction, useLoaderData } from 'remix'
+import { HeadersFunction, json, LoaderFunction, useLoaderData } from 'remix'
 import { Block } from '~/components/notion/block'
 import { NotionBlock } from '~/components/notion/types'
 import { getFrontPage } from '~/db.server'
+
+export const headers: HeadersFunction = ({ loaderHeaders }) => loaderHeaders
 
 export const loader: LoaderFunction = async () => {
     return json(await getFrontPage(), {
