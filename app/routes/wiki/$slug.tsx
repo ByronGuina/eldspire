@@ -29,7 +29,7 @@ export const meta: MetaFunction = ({ data, location }) => {
 
 export const headers: HeadersFunction = () => {
     return {
-        'Cache-Control': 'public, s-max-age=60, stale-while-revalidate=60, stale-if-error=60',
+        'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=60, stale-if-error=60',
     }
 }
 
@@ -52,7 +52,7 @@ export const loader: LoaderFunction = async ({ params, request }) => {
 
     return json(page, {
         headers: {
-            // 'Cache-Control': 'public, max-age=10, s-max-age=1, stale-while-revalidate=1, stale-if-error=1',
+            // 'Cache-Control': 'public, max-age=10, s-maxage=1, stale-while-revalidate=1, stale-if-error=1',
             'Last-Modified': lastEditedTime,
             ETag: hash,
         },
