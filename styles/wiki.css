@@ -25,3 +25,7 @@ img {
     width: 100%;
     object-fit: contain;
 }
+
+a {
+    text-decoration: underline;
+}
