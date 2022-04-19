@@ -8,21 +8,10 @@ interface SearchModalProps {
     onBackgroundClick: () => void
 }
 
-const defaultResults = [
-    {
-        title: 'Kalantha',
-        slug: 'kalantha',
-    },
-    {
-        title: 'Eldspire',
-        slug: 'eldspire',
-    },
-]
-
 function useQuery() {
     const pages = useSearch(state => state.results)
     const [query, setQuery] = useState('')
-    const [results, setResults] = useState<PageLink[]>(defaultResults)
+    const [results, setResults] = useState<PageLink[]>([])
 
     useEffect(() => {
         if (query === '') {

@@ -45,7 +45,7 @@ export function Navbar() {
 
     return (
         <nav className="navbar flex justify-between">
-            <Link to="/" prefetch="intent">
+            <Link to="/" prefetch="intent" className="no-underline">
                 Home
             </Link>
             <div>
