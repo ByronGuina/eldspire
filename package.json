@@ -11,7 +11,7 @@
         "build": "npm run css:build && remix build",
         "remix:dev": "remix watch",
         "dev": "run-p css:dev remix:dev worker:start",
-        "postinstall": "remix setup cloudflare",
+        "postinstall": "remix setup cloudflare-workers",
         "worker:build": "esbuild --define:process.env.NODE_ENV='\"production\"' --minify --bundle --sourcemap --outdir=dist ./worker",
         "worker:dev": "esbuild --define:process.env.NODE_ENV='\"development\"' --bundle --sourcemap --outdir=dist ./worker",
         "worker:start": "miniflare --build-command \"npm run worker:dev\" --watch",
