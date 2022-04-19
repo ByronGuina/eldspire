@@ -1,16 +1,8 @@
-import {
-    json,
-    Links,
-    LiveReload,
-    LoaderFunction,
-    Meta,
-    Outlet,
-    Scripts,
-    ScrollRestoration,
-    useLoaderData,
-    useTransition,
-} from 'remix'
-import type { MetaFunction, LinksFunction } from 'remix'
+import type { LinksFunction, MetaFunction } from '@remix-run/cloudflare'
+import { json, LoaderFunction } from '@remix-run/cloudflare'
+
+import { Links, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData, useTransition } from '@remix-run/react'
+
 import { AnimatePresence, motion } from 'framer-motion'
 
 import rootStyles from './styles/tailwind.css'

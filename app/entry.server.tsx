@@ -1,6 +1,6 @@
 import { renderToString } from 'react-dom/server'
-import { RemixServer } from 'remix'
-import type { EntryContext } from 'remix'
+import type { EntryContext } from "@remix-run/cloudflare";
+import { RemixServer } from "@remix-run/react";
 
 export default async function handleRequest(request: Request, status: number, headers: Headers, context: EntryContext) {
     const markup = renderToString(<RemixServer context={context} url={request.url} />)

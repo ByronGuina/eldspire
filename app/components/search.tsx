@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { forwardRef, Ref, useEffect, useState } from 'react'
-import { Link } from 'remix'
+import { Link } from "@remix-run/react";
 import { PageLink } from '~/db.server'
 import { useSearch } from '~/state'
 

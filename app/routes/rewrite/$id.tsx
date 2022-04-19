@@ -1,4 +1,4 @@
-import { LoaderFunction, redirect } from 'remix'
+import { LoaderFunction, redirect } from "@remix-run/cloudflare";
 import { pageIdToSlug } from '~/db.server'
 
 export const loader: LoaderFunction = async ({ params, request }) => {

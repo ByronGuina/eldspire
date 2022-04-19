@@ -1,6 +1,6 @@
 import { AnimatePresence } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
-import { Link } from 'remix'
+import { Link } from "@remix-run/react";
 import { Search } from './search'
 
 function useSearchModal(initialValue = false) {

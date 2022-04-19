@@ -1,4 +1,5 @@
-import { HeadersFunction, json, LinksFunction, LoaderFunction, MetaFunction, useLoaderData } from 'remix'
+import { HeadersFunction, json, LinksFunction, LoaderFunction, MetaFunction } from "@remix-run/cloudflare";
+import { useLoaderData } from "@remix-run/react";
 import { Block } from '~/components/notion/block'
 import { NotionBlock } from '~/components/notion/types'
 import { getPageBySlug, getPageLastEditedTime } from '~/db.server'

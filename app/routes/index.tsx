@@ -1,4 +1,5 @@
-import { HeadersFunction, json, LoaderFunction, useLoaderData } from 'remix'
+import { HeadersFunction, json, LoaderFunction } from "@remix-run/cloudflare";
+import { useLoaderData } from "@remix-run/react";
 import { Block } from '~/components/notion/block'
 import { NotionBlock } from '~/components/notion/types'
 import { getFrontPage } from '~/db.server'
