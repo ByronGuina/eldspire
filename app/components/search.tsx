@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { forwardRef, Ref, useEffect, useState } from 'react'
-import { Link } from "@remix-run/react";
+import { Link } from '@remix-run/react'
 import { PageLink } from '~/db.server'
 import { useSearch } from '~/state'
 
@@ -69,7 +69,7 @@ function SearchModal({ onBackgroundClick }: SearchModalProps, ref: Ref<HTMLInput
                                     key={page.slug}
                                     prefetch="render"
                                     to={`/wiki/${page.slug}`}
-                                    className="focus block px-4 py-2"
+                                    className="focus block px-4 py-2 no-underline"
                                 >
                                     <li className="list-none">{page.title}</li>
                                 </Link>
