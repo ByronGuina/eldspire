@@ -5,13 +5,9 @@
 body {
     @apply font-serif;
     font-size: 16px;
-    line-height: 1.65rem;
+    line-height: 1.75rem;
     color: #353533;
     background-color: #f2f2f0;
-}
-
-p {
-    margin-bottom: 1.85rem;
 }
 
 p {
@@ -19,7 +15,7 @@ p {
 }
 
 p + p {
-    text-indent: 1.85rem;
+    text-indent: 1.75rem;
     margin-top: 0;
 }
 
