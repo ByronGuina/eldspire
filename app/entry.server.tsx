@@ -1,6 +1,5 @@
 import { renderToReadableStream } from 'react-dom/server'
 import type { EntryContext } from '@remix-run/server-runtime'
-import isbot from 'isbot'
 import { RemixServer } from '@remix-run/react'
 
 export default async function handleRequest(request: Request, status: number, headers: Headers, context: EntryContext) {
@@ -11,10 +10,6 @@ export default async function handleRequest(request: Request, status: number, he
             status = 500
         },
     })
-
-    if (isbot(request.headers.get('user-agent'))) {
-        await body.allReady
-    }
 
     headers.set('Content-Type', 'text/html')
 
