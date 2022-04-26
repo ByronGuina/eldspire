@@ -6,25 +6,24 @@ import { getFrontPage } from '~/db.server'
 
 export const headers: HeadersFunction = ({ loaderHeaders }) => loaderHeaders
 
-// export const loader: LoaderFunction = async () => {
-//     return json(
-//         { blocks: await getFrontPage() },
-//         {
-//             headers: {
-//                 'Cache-Control': 'public, max-age=86400, s-maxage=86400',
-//             },
-//         },
-//     )
-// }
+export const loader: LoaderFunction = async () => {
+    return json(
+        { blocks: await getFrontPage() },
+        {
+            headers: {
+                'Cache-Control': 'public, max-age=86400, s-maxage=86400',
+            },
+        },
+    )
+}
 
 export default function Index() {
-    // const { blocks } = useLoaderData<{ blocks: NotionBlock[] }>()
+    const { blocks } = useLoaderData<{ blocks: NotionBlock[] }>()
     return (
-        <div>Hello world</div>
-        // <>
-        //     {blocks.map(b => (
-        //         <Block key={b.id} block={b} />
-        //     ))}
-        // </>
+        <>
+            {blocks.map(b => (
+                <Block key={b.id} block={b} />
+            ))}
+        </>
     )
 }
