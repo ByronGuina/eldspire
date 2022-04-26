@@ -1,7 +1,8 @@
 import { Client } from '@notionhq/client'
 import { NotionBlock, NotionTextBlock } from './components/notion/types'
 
-const notion = new Client({ auth: NOTION_API_TOKEN })
+// @ts-ignore How do we get the Deno namespace in here?
+const notion = new Client({ auth: Deno.env.get('NOTION_API_TOKEN') })
 
 const DATABASE_ID = '1c49b767ea344dabb55be7137d867092'
 

@@ -1,0 +1,13 @@
+[build]
+command = "pnpm build"
+publish = "public"
+
+[dev]
+command = "pnpm local:all"
+port = 8787
+
+[[headers]]
+for = "/build/*"
+
+[headers.values]
+"Cache-Control" = "public, max-age=31536000, s-maxage=31536000"

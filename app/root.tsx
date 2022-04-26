@@ -1,7 +1,16 @@
-import type { LinksFunction, MetaFunction } from '@remix-run/cloudflare'
-import { json, LoaderFunction } from '@remix-run/cloudflare'
+import type { LinksFunction, MetaFunction } from '@remix-run/server-runtime'
+import { json, LoaderFunction } from '@remix-run/server-runtime'
 
-import { Links, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData, useTransition } from '@remix-run/react'
+import {
+    Links,
+    LiveReload,
+    Meta,
+    Outlet,
+    Scripts,
+    ScrollRestoration,
+    useLoaderData,
+    useTransition,
+} from '@remix-run/react'
 
 import { AnimatePresence, motion } from 'framer-motion'
 
@@ -79,6 +88,7 @@ function Document({ children }: { children: React.ReactNode }) {
                 <link rel="apple-touch-icon" href="/favicon.png" />
                 <Meta />
                 <Links />
+                <LiveReload />
             </head>
             <body className="relative">
                 <Layout>{children}</Layout>

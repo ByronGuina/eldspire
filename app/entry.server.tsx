@@ -1,33 +1,31 @@
-import { renderToString } from 'react-dom/server'
-import type { EntryContext } from "@remix-run/cloudflare";
-import { RemixServer } from "@remix-run/react";
+import { renderToReadableStream } from 'react-dom/server'
+import type { EntryContext } from '@remix-run/server-runtime'
+import isbot from 'isbot'
+import { RemixServer } from '@remix-run/react'
 
 export default async function handleRequest(request: Request, status: number, headers: Headers, context: EntryContext) {
-    const markup = renderToString(<RemixServer context={context} url={request.url} />)
+    // const markup = ReactDOMServer.renderToString(<RemixServer context={context} url={request.url} />)
+
+    const body = await renderToReadableStream(<RemixServer context={context} url={request.url} />, {
+        onError() {
+            status = 500
+        },
+    })
+
+    if (isbot(request.headers.get('user-agent'))) {
+        await body.allReady
+    }
 
     headers.set('Content-Type', 'text/html')
 
-    const hash = naiveHash(markup)
-    if (headers.get('If-None-Match') === hash) {
-        return new Response(null, { status: 304 })
-    }
+    // if (ENVIRONMENT === 'dev') {
+    //     headers.set('Cache-Control', 'no-cache')
+    // }
 
-    headers.set('ETag', hash)
-    headers.append('Cache-Control', 's-maxage=60, stale-while-revalidate=60, stale-if-error=60')
-
-    const newResponse = new Response('<!DOCTYPE html>' + markup, {
+    const newResponse = new Response(body, {
         status,
         headers,
     })
 
     return newResponse
-}
-
-function naiveHash(entity: string) {
-    return (
-        'W/' +
-        `"${entity.split('').reduce((hash, char) => {
-            return (hash << 5) - hash + char.charCodeAt(0)
-        }, 0)}"`
-    )
 }
