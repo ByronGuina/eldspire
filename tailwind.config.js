@@ -6,6 +6,9 @@ module.exports = {
     theme: {
         fontFamily: {
             serif: ['"Iowan Old Style"', 'Iowan', 'Newsreader', 'serif'],
+            sans: [
+                "'Byron', 'Inter', system, -apple-system, '.SFNSText-Regular', 'San Francisco', 'Roboto', 'Segoe UI', 'Helvetica Neue', sans-serif",
+            ],
         },
         extend: {
             colors: {

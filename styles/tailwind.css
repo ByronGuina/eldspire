@@ -2,12 +2,49 @@
 
 @tailwind base;
 
+@font-face {
+    font-family: 'Byron';
+    font-style: normal;
+    font-weight: 400;
+    src: local(''), url('https://bairun-fonts.netlify.app/sohne-regular.woff2') format('woff2');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Byron';
+    font-style: italic;
+    font-weight: 400;
+    src: local(''), url('https://bairun-fonts.netlify.app/sohne-regular-cursive.woff2') format('woff2');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Byron';
+    font-style: normal;
+    font-weight: 600;
+    src: local(''), url('https://bairun-fonts.netlify.app/sohne-semibold.woff2') format('woff2');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Byron';
+    font-style: italic;
+    font-weight: 600;
+    src: local(''), url('https://bairun-fonts.netlify.app/sohne-semibold-cursive.woff2') format('woff2');
+    font-display: swap;
+}
+
 body {
     @apply font-serif;
-    font-size: 16px;
+    font-size: 18px;
     line-height: 1.75rem;
     color: #353533;
     background-color: #f2f2f0;
+
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-kerning: auto;
 }
 
 p {
@@ -19,16 +56,22 @@ p + p {
     margin-top: 0;
 }
 
+h1,
+h2,
+h3 {
+    @apply font-sans tracking-tight font-semibold;
+}
+
 h1 {
-    @apply font-semibold text-4xl mb-12 mt-12;
+    @apply text-4xl mb-12 mt-12;
 }
 
 h2 {
-    @apply font-semibold text-3xl mb-6 mt-12;
+    @apply text-3xl mb-6 mt-12;
 }
 
 h3 {
-    @apply font-semibold text-2xl mb-4 mt-12;
+    @apply text-2xl mb-4 mt-12;
 }
 
 .layout {
