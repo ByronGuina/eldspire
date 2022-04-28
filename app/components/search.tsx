@@ -1,12 +1,25 @@
 import { motion } from 'framer-motion'
-import React, { forwardRef, Ref, useCallback, useEffect, useMemo, useState } from 'react'
+import React, { forwardRef, Ref, useEffect, useRef, useState } from 'react'
 import { Link, useFetcher } from '@remix-run/react'
 import { PageLink } from '~/db.server'
 import { useSearch } from '~/state'
-import { debounce } from '~/lib/fn'
 
 interface SearchModalProps {
     onBackgroundClick: () => void
+}
+
+const useDebounce = <T extends (value: string) => void>(callback: T, delay: number) => {
+    const latestTimeout = useRef<NodeJS.Timeout>()
+
+    return (value: string) => {
+        if (latestTimeout.current) {
+            clearTimeout(latestTimeout.current)
+        }
+
+        latestTimeout.current = setTimeout(() => {
+            callback(value)
+        }, delay)
+    }
 }
 
 function useQuery() {
@@ -14,12 +27,7 @@ function useQuery() {
     const [query, setQuery] = useState('')
     const fetcher = useFetcher<PageLink[]>()
 
-    const fetchResults = useCallback(
-        (value: string) => debounce(() => fetcher.load(`/search/${value}`), 300),
-        [fetcher],
-    )
-
-    const search = useCallback((value: string) => fetchResults(value)(), [])
+    const search = useDebounce((value: string) => fetcher.load(`/search/${value}`), 300)
 
     useEffect(() => {
         if (query) search(query)
