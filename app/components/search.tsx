@@ -15,12 +15,14 @@ function useQuery() {
     const fetcher = useFetcher<PageLink[]>()
 
     const fetchResults = useCallback(
-        debounce(() => fetcher.submit({}, { action: `/search/${query}`, method: 'get' }), 300),
-        [fetcher, query],
+        (value: string) => debounce(() => fetcher.load(`/search/${value}`), 300),
+        [fetcher],
     )
 
+    const search = useCallback((value: string) => fetchResults(value)(), [])
+
     useEffect(() => {
-        if (query) fetchResults()
+        if (query) search(query)
     }, [query])
 
     const results = fetcher.data && fetcher.data.length > 0 && query ? fetcher.data.slice(0, 10) : pages.slice(0, 10)

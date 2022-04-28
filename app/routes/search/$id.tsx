@@ -6,6 +6,7 @@ export const loader: LoaderFunction = async ({ params }) => {
     if (!id) throw new Response('Not found', { status: 404, statusText: 'No search query was found in the loader' })
 
     const data = await searchPages(id)
+    console.log(data)
 
     return json(data, {
         // headers: {
