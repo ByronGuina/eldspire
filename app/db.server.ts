@@ -93,7 +93,7 @@ export async function getPageContent(id: string) {
     }
 }
 
-export async function searchPages(name: string) {
+export async function searchPages(name: string): Promise<PageLink[]> {
     const pages = await notion.databases.query({
         database_id: DATABASE_ID,
         filter: {
@@ -122,10 +122,8 @@ export type PageLink = {
 }
 
 export async function getPageLinks() {
-    const pages = await notion.databases.query({
-        database_id: DATABASE_ID,
-    })
-
+    const config: { database_id: string; nextCursor?: string } = { database_id: DATABASE_ID }
+    const pages = await notion.databases.query(config)
     const results = pages.results as unknown as WikiPageInfo[]
 
     return results
@@ -139,6 +137,7 @@ export async function getPageLinks() {
             }
         })
         .sort((a, b) => new Date(b.lastEditedTime).getTime() - new Date(a.lastEditedTime).getTime())
+        .slice(0, 10)
 }
 
 // We can use this for ETags and caching non-changed paged

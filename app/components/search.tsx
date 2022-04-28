@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion'
-import { forwardRef, Ref, useEffect, useState } from 'react'
-import { Link } from '@remix-run/react'
+import React, { forwardRef, Ref, useCallback, useEffect, useMemo, useState } from 'react'
+import { Link, useFetcher } from '@remix-run/react'
 import { PageLink } from '~/db.server'
 import { useSearch } from '~/state'
+import { debounce } from '~/lib/fn'
 
 interface SearchModalProps {
     onBackgroundClick: () => void
@@ -11,21 +12,22 @@ interface SearchModalProps {
 function useQuery() {
     const pages = useSearch(state => state.results)
     const [query, setQuery] = useState('')
-    const [results, setResults] = useState<PageLink[]>([])
+    const fetcher = useFetcher<PageLink[]>()
+
+    const fetchResults = useCallback(
+        debounce(() => fetcher.submit({}, { action: `/search/${query}`, method: 'get' }), 300),
+        [fetcher, query],
+    )
 
     useEffect(() => {
-        if (query === '') {
-            setResults(pages.slice(0, 10))
-        } else {
-            const filtered = pages.filter(page => page.title.toLowerCase().includes(query.toLowerCase()))
-            const firstTen = filtered.slice(0, 10)
-            setResults(firstTen)
-        }
+        if (query) fetchResults()
     }, [query])
+
+    const results = fetcher.data && fetcher.data.length > 0 && query ? fetcher.data.slice(0, 10) : pages.slice(0, 10)
 
     return {
         query,
-        setQuery,
+        setQuery: setQuery,
         results,
     }
 }
