@@ -1,5 +1,4 @@
 import { Client } from '@notionhq/client'
-import { BlockObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 import { NotionBlock, NotionTextBlock } from '../components/notion/types'
 
 const notion = new Client({ auth: process.env.NOTION_API_TOKEN })
@@ -19,6 +18,7 @@ export async function getFrontPage() {
 }
 
 type WikiPageInfo = {
+    id: string
     properties: {
         Name: {
             title: {
@@ -93,6 +93,13 @@ export async function getPageContent(id: string) {
     }
 }
 
+export type PageLink = {
+    title: string
+    slug: string
+    id: string
+    lastEditedTime: string
+}
+
 export async function searchPages(name: string): Promise<PageLink[]> {
     const pages = await notion.databases.query({
         database_id: DATABASE_ID,
@@ -109,53 +116,9 @@ export async function searchPages(name: string): Promise<PageLink[]> {
 
         return {
             title: p.properties.Name.title[0].plain_text,
+            id: p.id,
             slug: isSlug ? p.properties.slug.rich_text[0].plain_text : '',
             lastEditedTime: p.last_edited_time,
         }
     })
-}
-
-export type PageLink = {
-    title: string
-    slug: string
-    lastEditedTime: string
-}
-
-export async function getPageLinks() {
-    const config: { database_id: string; nextCursor?: string } = { database_id: DATABASE_ID }
-    const pages = await notion.databases.query(config)
-    const results = pages.results as unknown as WikiPageInfo[]
-
-    return results
-        .map(p => {
-            const isSlug = Boolean(p.properties.slug.rich_text?.[0])
-
-            return {
-                title: p.properties.Name.title[0].plain_text,
-                slug: isSlug ? p.properties.slug.rich_text?.[0].plain_text : '',
-                lastEditedTime: p.last_edited_time,
-            }
-        })
-        .sort((a, b) => new Date(b.lastEditedTime).getTime() - new Date(a.lastEditedTime).getTime())
-        .slice(0, 10)
-}
-
-// We can use this for ETags and caching non-changed paged
-export async function getPageLastEditedTime(slug: string) {
-    const pages = await notion.databases.query({
-        database_id: DATABASE_ID,
-        filter: {
-            property: 'slug',
-            rich_text: { equals: slug },
-        },
-    })
-
-    const results = pages.results as unknown as WikiPageInfo[]
-    const page = results.find(p => p.properties.slug.rich_text?.[0].plain_text === slug)
-
-    if (!page) {
-        throw new Response('Page cache not found in getPageLastEditedTime', { status: 404 })
-    }
-
-    return page.last_edited_time
 }

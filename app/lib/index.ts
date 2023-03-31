@@ -1,1 +1,1 @@
-export * as DB from './db.ts'
+export * as DB from './db'
