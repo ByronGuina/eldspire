@@ -1,4 +1,4 @@
-import { Link } from "@remix-run/react";
+import Link from 'next/link'
 import { getStyles } from './build-styles'
 import { NotionBlock } from './types'
 
@@ -12,8 +12,7 @@ export function textToComponents(block: NotionBlock) {
             if (b.type === 'mention') {
                 return (
                     <Link
-                        prefetch="render"
-                        to={`/rewrite/${b.mention?.page.id}`}
+                        href={`/wiki/${b.mention?.page.id}`}
                         className={`${styles} underline opacity-80 hover:opacity-60 transition-colors duration-150 focus`}
                         key={`${b.plain_text}-${i}`}
                     >

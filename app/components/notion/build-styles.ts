@@ -3,7 +3,7 @@ import { NotionTextBlock } from './types'
 // TODO: This can be passed as a style resolver from the consumer. This
 // would let us let the consumer specify how to style inline text styles.
 export function getStyles(annotations: NotionTextBlock['annotations']) {
-    let styles = ``
+    let styles = ''
 
     if (annotations.bold) {
         styles += 'font-semibold '
@@ -18,11 +18,11 @@ export function getStyles(annotations: NotionTextBlock['annotations']) {
     }
 
     if (annotations.underline) {
-        styles += `border-b `
+        styles += 'border-b '
     }
 
     if (annotations.code) {
-        styles += `font-mono `
+        styles += 'font-mono '
     }
 
     return styles

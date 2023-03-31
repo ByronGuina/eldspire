@@ -5,46 +5,25 @@
     "license": "ISC",
     "sideEffects": false,
     "scripts": {
-        "clear": "rm -rf ./public/build",
-        "css:dev": "postcss **/*.css --dir app/styles -w",
-        "css:build": "postcss **/*.css --dir app/styles --env production",
-        "build": "npm run clear && npm run css:build && remix build",
-        "local:all": "run-p css:dev remix:dev",
-        "remix:dev": "remix watch",
-        "dev": "cross-env NODE_ENV=development netlify dev",
-        "start": "cross-env NODE_ENV=production netlify dev"
+        "dev": "next dev",
+        "start": "next start",
+        "build": "next build"
     },
     "dependencies": {
-        "@netlify/functions": "latest",
-        "@notionhq/client": "^1.0.3",
-        "@remix-run/netlify-edge": "experimental-netlify-edge",
-        "@remix-run/react": "experimental-netlify-edge",
-        "@remix-run/server-runtime": "experimental-netlify-edge",
-        "autoprefixer": "^10.4.2",
-        "cross-env": "^7.0.3",
-        "framer-motion": "^6.2.8",
-        "pnpm": "^6.32.10",
-        "react": "^18.0.0",
-        "react-dom": "^18.0.0",
-        "react-router-dom": "^6.0.2",
-        "zustand": "^3.7.1"
+        "@notionhq/client": "^2.2.3",
+        "framer-motion": "^10.0.0",
+        "next": "^13.2.4",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0"
     },
     "devDependencies": {
-        "@remix-run/dev": "experimental-netlify-edge",
-        "@remix-run/eslint-config": "^1.4.0",
-        "@remix-run/node": "^1.4.0",
-        "@types/node": "^14.0.14",
-        "@types/react": "^18.0.0",
-        "@types/react-dom": "^18.0.0",
-        "cssnano": "^5.1.7",
-        "eslint": "^8.9.0",
-        "npm-run-all": "^4.1.5",
-        "postcss": "^8.4.8",
+        "@types/react": "^18.0.31",
+        "@types/react-dom": "^18.0.11",
+        "autoprefixer": "^10.4.13",
+        "postcss": "^8.4.18",
         "postcss-cli": "^9.1.0",
-        "tailwindcss": "^3.0.23",
-        "typescript": "^4.5.5"
-    },
-    "engines": {
-        "node": ">=14.x"
+        "rome": "^11.0.0",
+        "tailwindcss": "^3.1.8",
+        "typescript": "^4.8.4"
     }
 }
