@@ -1,7 +1,6 @@
 'use client'
 
 import { Command } from 'cmdk'
-import { AnimatePresence } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import { PageLink } from '~/lib/db'
 import { ResizableContainer } from './resizable-container'
